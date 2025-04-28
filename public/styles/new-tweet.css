@@ -49,3 +49,6 @@
 
 }
 
+.counter.outOfWords {
+  color: red;
+}
