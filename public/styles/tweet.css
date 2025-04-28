@@ -1,0 +1,52 @@
+/* Basic tweet container styles */
+.tweet {
+  width: 100%;
+  align-items: center;
+  border-radius: 15px;
+}
+
+/* Header with user info */
+.tweet header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5em;
+}
+
+.tweet img {
+  width: 50px;
+  height: 50px;
+}
+
+.tweet user-info.username{
+  font-size: medium;
+}
+
+.tweet user-info.At_user {
+  color: lightgray;
+}
+
+
+.tweet tweet-content {
+
+  line-height: 1.5;
+}
+
+
+.tweet footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.tweet .icons {
+
+  color: #4056A1;
+  cursor: pointer;
+
+}
+
+.tweet footer .icon:hover {
+  color: darkgoldenrod;
+  box-shadow: 10px 10px 8px #888888;
+}
+
