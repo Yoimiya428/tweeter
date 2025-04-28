@@ -1,6 +1,6 @@
-new-tweet {
+.new-tweet {
   
-  background-color: lightgray;
+
   align-items: center;
 
 }
@@ -16,9 +16,9 @@ new-tweet {
 }
 
 .new-tweet textarea {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   border: none;
-  height: 1.5em;
+
   resize: none;
   border-bottom: 2px solid;
   background: transparent;
@@ -37,6 +37,7 @@ new-tweet {
   color: white;
   border: none;
   font-weight: bold;
+
 
 }
 
