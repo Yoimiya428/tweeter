@@ -44,31 +44,22 @@ const timeAgo = (timestamp) => {
 };
 
 
-const validateTweet = function(text) {
-  const trimmed = text.trim();
-
-  if (!trimmed) {
-    return "Content cannot be empty.";
-  }
-
-  if (trimmed.length > 140) {
-    return "Content exceeds the 140 character limit.";
-  }
-
-  return null; // valid
-};
-
 $(document).ready(function () {
   loadTweets();
 
+  $('#error-message').hide();
+
   $('.new-tweet form').submit(function (event) {
     event.preventDefault();
+
+    $('#error-message').slideUp();
 
     const tweetContent = $(this).find("textarea").val();
     const errorMessage = validateTweet(tweetContent);
 
     if (errorMessage) {
-      alert(errorMessage); 
+      $('#error-message p').text(errorMessage);
+      $('#error-message').slideDown();
       return;
     }
 
@@ -86,7 +77,15 @@ $(document).ready(function () {
   });
 });
 
-
+const validateTweet = function (tweet) {
+  if (!tweet || tweet.trim() === '') {
+    return "Tweet cannot be empty!";
+  }
+  if (tweet.length > 140) {
+    return "Tweet should be within 140 characters!";
+  }
+  return null;
+};
 
 
 const renderTweets = function(tweets) {
@@ -124,6 +123,7 @@ const createTweetElement = function(tweet) {
       </footer>
     </article>
   `);
+  $tweet.find('.tweet-content').text(content.text);
 
   return $tweet;
 };

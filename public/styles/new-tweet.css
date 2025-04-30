@@ -52,3 +52,13 @@
 .counter.outOfWords {
   color: red;
 }
+
+.error-message {
+  display: none;
+  color: red;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 10px;
+  border: 1px solid red;
+  font-size: large;
+}
