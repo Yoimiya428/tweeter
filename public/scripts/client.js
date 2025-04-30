@@ -44,6 +44,22 @@ const timeAgo = (timestamp) => {
 };
 
 
+const validateTweet = function(text) {
+  const trimmed = text.trim();
+
+  if (!trimmed) {
+    return "Content cannot be empty.";
+  }
+
+  if (trimmed.length > 140) {
+    return "Content exceeds the 140 character limit.";
+  }
+
+  return null; // valid
+};
+
+
+
 
 const renderTweets = function(tweets) {
   $('#tweets-container').empty(); // Clear existing tweets
