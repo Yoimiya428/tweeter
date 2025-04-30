@@ -64,15 +64,14 @@ $(document).ready(function () {
   $('.new-tweet form').submit(function (event) {
     event.preventDefault();
 
-    const $textarea = $(this).find('textarea');
-    const tweetText = $textarea.val();
-    const errorMessage = validateTweet(tweetText);
+    const tweetContent = $(this).find("textarea").val();
+    const errorMessage = validateTweet(tweetContent);
 
     if (errorMessage) {
       alert(errorMessage); 
+      return;
     }
 
-    // If valid, send data
     const formData = $(this).serialize();
 
     $.post('/api/tweets', formData)
@@ -144,6 +143,22 @@ const loadTweets = function() {
   });
 };
 
+
+app.post("/api/tweets", (req, res) => {
+  const tweet = req.body;
+  const newTweet = {
+    ...tweet,
+    created_at: Date.now(),
+    user: {
+      name: "User",
+      avatars: "avatar_url",
+      handle: "@handle"
+    }
+  };
+
+  tweets.push(newTweet);
+  res.status(201).json(newTweet); 
+});
 
 
 
