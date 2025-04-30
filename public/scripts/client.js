@@ -75,17 +75,19 @@ $(document).ready(function () {
         console.error('Tweet post failed:', err);
       });
   });
+
+  const validateTweet = function (tweet) {
+    if (!tweet || tweet.trim() === '') {
+      return "Tweet cannot be empty!";
+    }
+    if (tweet.length > 140) {
+      return "Tweet should be within 140 characters!";
+    }
+    return null;
+  };
+
 });
 
-const validateTweet = function (tweet) {
-  if (!tweet || tweet.trim() === '') {
-    return "Tweet cannot be empty!";
-  }
-  if (tweet.length > 140) {
-    return "Tweet should be within 140 characters!";
-  }
-  return null;
-};
 
 
 const renderTweets = function(tweets) {
@@ -142,7 +144,6 @@ const loadTweets = function() {
     }
   });
 };
-
 
 app.post("/api/tweets", (req, res) => {
   const tweet = req.body;
