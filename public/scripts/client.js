@@ -58,6 +58,35 @@ const validateTweet = function(text) {
   return null; // valid
 };
 
+$(document).ready(function () {
+  loadTweets();
+
+  $('.new-tweet form').submit(function (event) {
+    event.preventDefault();
+
+    const $textarea = $(this).find('textarea');
+    const tweetText = $textarea.val();
+    const errorMessage = validateTweet(tweetText);
+
+    if (errorMessage) {
+      alert(errorMessage); 
+    }
+
+    // If valid, send data
+    const formData = $(this).serialize();
+
+    $.post('/api/tweets', formData)
+      .then(() => {
+        $textarea.val('');        
+        $('.counter').text(140);  
+        loadTweets();             
+      })
+      .catch((err) => {
+        console.error('Tweet post failed:', err);
+      });
+  });
+});
+
 
 
 
