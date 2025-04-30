@@ -56,21 +56,21 @@ const renderTweets = function(tweets) {
 const createTweetElement = function(tweet) {
   const { user, content, created_at } = tweet;
   
-  const timeAgo = timeAgo(created_at);
+  const time = timeAgo(created_at);
 
   let $tweet = $(`
     <article class="tweet">
       <header>
         <div class="user">
           <img src="${user.avatars}" class="avatar">
-          <span class="username">${user.username}</span>
-          <span class="At_user">${user.At_user}</span>
+          <span class="username">${user.name}</span>
+          <span class="At_user">${user.handle}</span>
         </div>
       </header>
       <p class="tweet-content">${content.text}</p>
       <footer>
         <div class="timestamp">
-          <p>${timeAgo}</p>
+          <p>${time}</p>
         </div>
         <div class="icons">
           <button class="icon-reply"> <i class="fa-solid fa-flag"></i></button>
