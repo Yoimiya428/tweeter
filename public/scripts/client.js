@@ -56,7 +56,7 @@ const renderTweets = function(tweets) {
 const createTweetElement = function(tweet) {
   const { user, content, created_at } = tweet;
   
-  const tweetTime = timeAgo(created_at);  // Assuming you have this function ready
+  const timeAgo = timeago.format(created_at);
 
   let $tweet = $(`
     <article class="tweet">
@@ -70,7 +70,7 @@ const createTweetElement = function(tweet) {
       <p class="tweet-content">${content.text}</p>
       <footer>
         <div class="timestamp">
-          <p>${tweetTime}</p>
+          <p>${timeAgo}</p>
         </div>
         <div class="icons">
           <button class="icon-reply"> <i class="fa-solid fa-flag"></i></button>
@@ -83,4 +83,30 @@ const createTweetElement = function(tweet) {
 
   return $tweet;
 };
+
+
+const loadTweets = function() {
+  $.ajax({
+    url: '/api/tweets',
+    method: 'GET',
+    dataType: 'json',
+    success: function(tweets) {
+      renderTweets(tweets); 
+    },
+    error: function(error) {
+      console.error("Couldn't be loaded", error);
+    }
+  });
+};
+
+
+
+
+
+
+
+
+
+
+
 renderTweets(data);
