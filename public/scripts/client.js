@@ -44,6 +44,21 @@ const timeAgo = (timestamp) => {
 };
 
 
+const loadTweets = function() {
+  $.ajax({
+    url: '/api/tweets',
+    method: 'GET',
+    dataType: 'json',
+    success: function(tweets) {
+      const allTweets = data.concat(tweets); 
+      renderTweets(allTweets);
+    },
+    error: function(error) {
+      console.error("Couldn't be loaded", error);
+    }
+  });
+};
+
 $(document).ready(function () {
   loadTweets();
 
@@ -54,7 +69,8 @@ $(document).ready(function () {
 
     $('#error-message').slideUp();
 
-    const tweetContent = $(this).find("textarea").val();
+    const $textarea = $(this).find("textarea");
+    const tweetContent = $textarea.val();
     const errorMessage = validateTweet(tweetContent);
 
     if (errorMessage) {
@@ -66,9 +82,12 @@ $(document).ready(function () {
     const formData = $(this).serialize();
 
     $.post('/api/tweets', formData)
-      .then(() => {
+      .then((newTweet) => {
         $textarea.val('');        
         $('.counter').text(140);  
+
+        $('#error-message').slideUp()
+
         loadTweets();             
       })
       .catch((err) => {
@@ -90,14 +109,6 @@ $(document).ready(function () {
 
 
 
-const renderTweets = function(tweets) {
-  $('#tweets-container').empty(); // Clear existing tweets
-  for (const newTweet of tweets) {
-    const $tweetElement = createTweetElement(newTweet);
-    $('#tweets-container').append($tweetElement);
-  }
-}
-
 const createTweetElement = function(tweet) {
   const { user, content, created_at } = tweet;
   
@@ -105,7 +116,7 @@ const createTweetElement = function(tweet) {
 
   let $tweet = $(`
     <article class="tweet">
-      <header>
+      <header class= "tweet-header">
         <div class="user">
           <img src="${user.avatars}" class="avatar">
           <span class="username">${user.name}</span>
@@ -131,35 +142,14 @@ const createTweetElement = function(tweet) {
 };
 
 
-const loadTweets = function() {
-  $.ajax({
-    url: '/api/tweets',
-    method: 'GET',
-    dataType: 'json',
-    success: function(tweets) {
-      renderTweets(tweets); 
-    },
-    error: function(error) {
-      console.error("Couldn't be loaded", error);
-    }
-  });
-};
+const renderTweets = function(tweets) {
+  $('#tweets-container').empty(); // Clear existing tweets
+  for (const newTweet of tweets) {
+    const $tweetElement = createTweetElement(newTweet);
+    $('#tweets-container').prepend($tweetElement);
+  }
+}
 
-app.post("/api/tweets", (req, res) => {
-  const tweet = req.body;
-  const newTweet = {
-    ...tweet,
-    created_at: Date.now(),
-    user: {
-      name: "User",
-      avatars: "avatar_url",
-      handle: "@handle"
-    }
-  };
-
-  tweets.push(newTweet);
-  res.status(201).json(newTweet); 
-});
 
 
 

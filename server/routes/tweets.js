@@ -44,3 +44,34 @@ module.exports = (dataHelpers) => {
   return tweetsRoutes;
 
 };
+
+
+
+const app = express();
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
+
+const tweets = [];
+
+app.post("/api/tweets", (req, res) => {
+  const tweet = req.body;
+
+  const newTweet = {
+    ...tweet,
+    created_at: Date.now(),
+    user: {
+      name: "User",
+      avatars: "https://i.imgur.com/73hZDYK.png",
+      handle: "@User"
+    }
+  };
+
+  tweets.unshift(newTweet);
+  res.status(201).json(newTweet);
+});
+
+app.get("/api/tweets", (req, res) => {
+  res.json(tweets);
+});

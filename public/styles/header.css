@@ -1,12 +1,37 @@
-header {
-  width: 100%;
+.main-header {
+  width: 20%;
+  height: 20%;
+  margin: 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: orange;
+  background-color:orange;
 
   color: white;
 
   background-image: url("https://www.transparenttextures.com/patterns/bright-squares.png");
+}
+
+.photo {
+  width: 75%;
+}
+
+.photo-container {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 1024px) {
+  .main-header {
+    width: 100%;
+    margin: 0;
+  }
+
+  .photo {
+    width: 100%;
+  }
+  
 }

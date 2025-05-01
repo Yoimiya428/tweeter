@@ -31,3 +31,10 @@ nav span {
 .tweet-button i {
  color: #ff0000;
 }
+
+@media only screen and (max-width: 1024px) {
+  nav {
+    background-color: orange;
+    background-image: url("https://www.transparenttextures.com/patterns/bright-squares.png");
+  }
+}
