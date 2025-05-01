@@ -16,3 +16,7 @@ This repository is the starter code for the project: Students will fork and clon
 
 - Express
 - Node 5.10.x or above
+
+["full screen"](https://github.com/Yoimiya428/tweeter/blob/master/docs/full-screen.PNG)
+["tablet screen"](https://github.com/Yoimiya428/tweeter/blob/master/docs/tablet%20screen.PNG)
+["new tweet"](https://github.com/Yoimiya428/tweeter/blob/master/docs/new%20tweet.PNG)
